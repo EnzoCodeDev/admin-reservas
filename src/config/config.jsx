@@ -1,0 +1,1 @@
+export const urlApi = 'https://api-reservas-gta4.onrender.com/api'
