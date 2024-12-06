@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      <BrowserRouter>
+      <BrowserRouter basename='/admin-reservas'>
         <Routes>
           <Route path="/">
             <Route path="login" element={<Login />} />
