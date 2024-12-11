@@ -15,12 +15,18 @@
       text-decoration: none;
       color: green;
       font-size: 16px;
-      font-weight: 400;
-      border: 1px solid green;
+      font-weight: 500;
+      border: 2px solid green;
       padding: 5px;
       border-radius: 5px;
       cursor: pointer;
+
+      &:hover {
+        background-color: rgba(92, 237, 14, 0.1);
+      }
     }
+
+    
   }
 
   .cellWithImg {
@@ -78,17 +84,18 @@
 }
 
 .bulkDelete {
-  margin-left: 10px;
-  padding: 10px 20px;
-  background-color: #d32f2f;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
+  text-decoration: none;
+  color: red;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid red;
+  padding: 5px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: none;
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: #b71c1c;
+    background-color: rgba(243, 20, 20, 0.1);
   }
 }
