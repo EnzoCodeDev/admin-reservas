@@ -46,7 +46,7 @@ const NewHotel = () => {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Add New Product</h1>
+          <h1>Agregar un nuevo Lugar</h1>
         </div>
         <div className="bottom">
           <div className="right">
@@ -70,7 +70,7 @@ const NewHotel = () => {
                 </select>
               </div>
               <div className="selectRooms">
-                <label>Rooms</label>
+                <label>Salas</label>
                 <select id="rooms" multiple onChange={handleSelect}>
                   {loading
                     ? "loading"
@@ -82,7 +82,7 @@ const NewHotel = () => {
                       ))}
                 </select>
               </div>
-              <button onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Enviar</button>
             </form>
           </div>
         </div>

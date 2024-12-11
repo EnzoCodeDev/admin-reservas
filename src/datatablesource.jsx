@@ -21,17 +21,17 @@ export const userColumns = [
 
   {
     field: "country",
-    headerName: "Country",
+    headerName: "País",
     width: 100,
   },
   {
     field: "city",
-    headerName: "City",
+    headerName: "Ciudad",
     width: 100,
   },
   {
     field: "phone",
-    headerName: "Phone",
+    headerName: "Teléfono",
     width: 100,
   },
 ];
@@ -40,22 +40,22 @@ export const hotelColumns = [
   { field: "_id", headerName: "ID", width: 250 },
   {
     field: "name",
-    headerName: "Name",
+    headerName: "Nombre",
     width: 150,
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: "Tipo",
     width: 100,
   },
   {
     field: "title",
-    headerName: "Title",
+    headerName: "Titulo",
     width: 230,
   },
   {
     field: "city",
-    headerName: "City",
+    headerName: "Ciudad",
     width: 100,
   },
 ];
@@ -64,22 +64,22 @@ export const roomColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
     field: "title",
-    headerName: "Title",
+    headerName: "Título",
     width: 230,
   },
   {
     field: "desc",
-    headerName: "Description",
+    headerName: "Descripción",
     width: 200,
   },
   {
     field: "price",
-    headerName: "Price",
+    headerName: "Precio",
     width: 100,
   },
   {
     field: "maxPeople",
-    headerName: "Max People",
-    width: 100,
+    headerName: "Máximo de personas",
+    width: 150,
   },
 ];

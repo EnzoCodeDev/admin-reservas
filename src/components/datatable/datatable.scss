@@ -76,3 +76,19 @@
     }
   }
 }
+
+.bulkDelete {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #d32f2f;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #b71c1c;
+  }
+}

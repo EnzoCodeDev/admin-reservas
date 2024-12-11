@@ -6,10 +6,13 @@ import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { urlApi } from "../../config/config";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import swal from "sweetalert"; // Importar SweetAlert
 
 const NewRoom = () => {
   const [info, setInfo] = useState({});
   const [hotelId, setHotelId] = useState(undefined);
+  const navigate = useNavigate(); // Inicializa el hook de navegación
 
   const { data, loading, error } = useFetch("/hotels");
 
@@ -19,11 +22,29 @@ const NewRoom = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const roomNumbers = '1'.split(",").map((room) => ({ number: room }));
+    const roomNumbers = "1".split(",").map((room) => ({ number: room }));
     try {
       await axios.post(`${urlApi}/rooms/${hotelId}`, { ...info, roomNumbers });
+
+      // Mostrar popup con SweetAlert
+      swal({
+        title: "¡Guardado correctamente!",
+        text: "La sala se ha guardado con éxito.",
+        icon: "success",
+        button: "Aceptar",
+      }).then(() => {
+        navigate("/rooms"); // Redirige a la lista de habitaciones después de cerrar el popup
+      });
     } catch (err) {
       console.log(err);
+
+      // Mostrar error con SweetAlert
+      swal({
+        title: "Error",
+        text: "Hubo un problema al guardar la habitación.",
+        icon: "error",
+        button: "Intentar de nuevo",
+      });
     }
   };
 
@@ -33,7 +54,7 @@ const NewRoom = () => {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Agrega una nueva habitación</h1>
+          <h1>Agrega una nueva sala</h1>
         </div>
         <div className="bottom">
           <div className="right">
@@ -50,7 +71,7 @@ const NewRoom = () => {
                 </div>
               ))}
               <div className="formInput">
-                <label>Escoge un hotel</label>
+                <label>Escoge un Lugar</label>
                 <select
                   id="hotelId"
                   onChange={(e) => {
@@ -61,11 +82,13 @@ const NewRoom = () => {
                     ? "loading"
                     : data &&
                       data.map((hotel) => (
-                        <option key={hotel._id} value={hotel._id}>{hotel.name}</option>
+                        <option key={hotel._id} value={hotel._id}>
+                          {hotel.name}
+                        </option>
                       ))}
                 </select>
               </div>
-              <button onClick={handleClick}>Guardar</button>
+              <button onClick={handleClick}>Agregar</button>
             </form>
           </div>
         </div>
