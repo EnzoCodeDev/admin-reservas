@@ -1,12 +1,12 @@
 import "./newHotel.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import { hotelInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { urlApi } from "../../config/config";
+import swal from "sweetalert"; // Importar SweetAlert
 
 const NewHotel = () => {
   const [files, setFiles] = useState("");
@@ -20,26 +20,43 @@ const NewHotel = () => {
   };
 
   const handleSelect = (e) => {
-    const value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
+    const value = Array.from(e.target.selectedOptions, (option) => option.value);
     setRooms(value);
   };
-  
-  console.log(files)
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const newhotel = {
+      const newHotel = {
         ...info,
         rooms,
       };
 
-      await axios.post(`${urlApi}/hotels`, newhotel);
-    } catch (err) {console.log(err)}
+      await axios.post(`${urlApi}/hotels`, newHotel);
+
+      // Mostrar SweetAlert de éxito
+      swal({
+        title: "¡Guardado correctamente!",
+        text: "El lugar se ha guardado con éxito.",
+        icon: "success",
+        button: "Aceptar",
+      }).then(() => {
+        // Opcional: redirigir a otra página
+        window.location.href = "/admin-reservas/hotels";
+      });
+    } catch (err) {
+      console.error(err);
+
+      // Mostrar SweetAlert de error
+      swal({
+        title: "Error",
+        text: "Hubo un problema al guardar el lugar.",
+        icon: "error",
+        button: "Intentar de nuevo",
+      });
+    }
   };
+
   return (
     <div className="new">
       <Sidebar />
@@ -63,17 +80,17 @@ const NewHotel = () => {
                 </div>
               ))}
               <div className="formInput">
-                <label>Featured</label>
+                <label>Destacado</label>
                 <select id="featured" onChange={handleChange}>
                   <option value={false}>No</option>
-                  <option value={true}>Yes</option>
+                  <option value={true}>Sí</option>
                 </select>
               </div>
               <div className="selectRooms">
                 <label>Salas</label>
                 <select id="rooms" multiple onChange={handleSelect}>
                   {loading
-                    ? "loading"
+                    ? "Cargando salas..."
                     : data &&
                       data.map((room) => (
                         <option key={room._id} value={room._id}>

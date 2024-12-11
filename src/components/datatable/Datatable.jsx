@@ -8,10 +8,11 @@ import swal from "sweetalert"; // Importar SweetAlert para confirmaciones
 
 const Datatable = ({ columns }) => {
   const location = useLocation();
-  const path = location.pathname.split("/")[1]; // Detecta si es "rooms" o "hotels"
+  const path = location.pathname.split("/")[1]; // Detecta si es "rooms", "hotels" o "users"
   const [list, setList] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]); // Estado para manejar las filas seleccionadas
   const { data, loading, error } = useFetch(`/${path}`);
+
   useEffect(() => {
     setList(data);
   }, [data]);
@@ -90,12 +91,23 @@ const Datatable = ({ columns }) => {
     },
   ];
 
+  // Mapea el path al título correspondiente
+  const titleMap = {
+    users: "Usuarios",
+    rooms: "Salas",
+    hotels: "Lugares",
+  };
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        {path === "rooms" ? "Salas" : "Lugares"}
+        {titleMap[path] || "Datos"} {/* Muestra el título dinámico basado en el path */}
         <Link to={`/${path}/new`} className="link">
-          {path === "rooms" ? "Nueva sala" : "Nuevo lugar"}
+          {path === "rooms"
+            ? "Nueva Sala"
+            : path === "hotels"
+            ? "Nuevo Lugar"
+            : "Nuevo Usuario"}
         </Link>
         {selectedRows.length > 0 && (
           <button
