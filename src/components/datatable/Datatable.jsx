@@ -12,7 +12,6 @@ const Datatable = ({ columns }) => {
   const [list, setList] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]); // Estado para manejar las filas seleccionadas
   const { data, loading, error } = useFetch(`/${path}`);
-
   useEffect(() => {
     setList(data);
   }, [data]);
