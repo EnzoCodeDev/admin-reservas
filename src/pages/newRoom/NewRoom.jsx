@@ -36,7 +36,7 @@ const NewRoom = () => {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Add New Room</h1>
+          <h1>Agrega una nueva habitación</h1>
         </div>
         <div className="bottom">
           <div className="right">
@@ -53,14 +53,14 @@ const NewRoom = () => {
                 </div>
               ))}
               <div className="formInput">
-                <label>Rooms</label>
+                <label>Habitaciones</label>
                 <textarea
                   onChange={(e) => setRooms(e.target.value)}
                   placeholder="give comma between room numbers."
                 />
               </div>
               <div className="formInput">
-                <label>Choose a hotel</label>
+                <label>Escoge un hotel</label>
                 <select
                   id="hotelId"
                   onChange={(e) => setHotelId(e.target.value)}
@@ -73,7 +73,7 @@ const NewRoom = () => {
                       ))}
                 </select>
               </div>
-              <button onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Guardar</button>
             </form>
           </div>
         </div>

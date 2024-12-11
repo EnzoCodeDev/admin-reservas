@@ -1,33 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
 .new {
   width: 100%;
   display: flex;
+  background-color: #f9f9f9;
+  font-family: 'Montserrat', sans-serif;
 
   .newContainer {
     flex: 6;
+    padding: 20px;
 
     .top,
     .bottom {
-      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-      padding: 10px;
-      margin: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin: 20px 0;
       display: flex;
+      flex-direction: column;
+      border-radius: 12px;
+      background-color: #ffffff;
 
       h1 {
-        color: lightgray;
-        font-size: 20px;
-      }
-
-      .left {
-        flex: 1;
+        color: #333333;
+        font-size: 26px;
+        margin-bottom: 20px;
         text-align: center;
-
-        img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
+        font-weight: 600;
+        letter-spacing: 0.5px;
       }
 
       .right {
@@ -36,40 +35,77 @@
         form {
           display: flex;
           flex-wrap: wrap;
-          gap: 30px;
+          gap: 20px;
           justify-content: space-between;
-          padding: 0 20px;
 
           .formInput {
-            width: 40%;
+            width: 45%;
+            position: relative;
 
             label {
-              display: flex;
-              align-items: center;
-              gap: 10px;
+              margin-bottom: 8px;
+              font-size: 14px;
+              font-weight: 600;
+              color: #555;
+            }
 
-              .icon {
-                cursor: pointer;
+            input,
+            textarea,
+            select {
+              width: 100%;
+              padding: 12px;
+              border: none;
+              border-radius: 8px;
+              background-color: #ffffff;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.06); // Sombra sutil en 4 lados
+              font-size: 14px;
+              color: #333;
+              transition: all 0.3s ease;
+
+              &:hover {
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 0 3px rgba(0, 0, 0, 0.1); // Mayor profundidad al pasar el mouse
+              }
+
+              &:focus {
+                outline: none;
+                box-shadow: 0 4px 8px rgba(0, 123, 123, 0.2), 0 0 4px rgba(0, 123, 123, 0.15); // Resaltar más al enfocar
               }
             }
 
-            input {
-              width: 100%;
-              padding: 5px;
-              border: none;
-              border-bottom: 1px solid gray;
+            input[type='number']::-webkit-inner-spin-button,
+            input[type='number']::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+
+            textarea {
+              resize: vertical;
+              min-height: 100px;
             }
           }
 
           button {
-            width: 150px;
-            padding: 10px;
+            width: 160px;
+            padding: 14px;
             border: none;
-            background-color: teal;
-            color: white;
-            font-weight: bold;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00796b, #004d4d); // Gradiente elegante
+            color: #ffffff;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            align-self: flex-end;
+
+            &:hover {
+              background: linear-gradient(135deg, #005a4c, #003b3b); // Gradiente más oscuro
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Sombra adicional
+            }
+
+            &:active {
+              transform: scale(0.98);
+            }
           }
         }
       }
