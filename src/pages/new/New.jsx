@@ -1,10 +1,10 @@
 import "./new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
 import { urlApi } from "../../config/config";
+import swal from "sweetalert";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
@@ -20,21 +20,32 @@ const New = ({ inputs, title }) => {
     data.append("file", file);
     data.append("upload_preset", "upload");
     try {
-      const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/lamadev/image/upload",
-        data
-      );
-
-      const { url } = uploadRes.data;
-
       const newUser = {
         ...info,
-        img: url,
+        img: "",
       };
 
-      await axios.post(`${urlApi}/auth/register`, newUser);
+      await axios.post(`${urlApi}/users`, newUser);
+
+      // Mostrar SweetAlert de éxito
+      swal({
+        title: "¡Guardado correctamente!",
+        text: "El usuario se ha guardado con éxito.",
+        icon: "success",
+        button: "Aceptar",
+      }).then(() => {
+        window.location.href = "/admin-reservas/users";
+      });
     } catch (err) {
       console.log(err);
+
+       // Mostrar SweetAlert de error
+       swal({
+        title: "Error",
+        text: "Hubo un problema al guardar el usuario.",
+        icon: "error",
+        button: "Intentar de nuevo",
+      });
     }
   };
 
@@ -48,29 +59,10 @@ const New = ({ inputs, title }) => {
           <h1>{title}</h1>
         </div>
         <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
-          </div>
+
           <div className="right">
             <form>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  style={{ display: "none" }}
-                />
-              </div>
+          
 
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
@@ -83,7 +75,7 @@ const New = ({ inputs, title }) => {
                   />
                 </div>
               ))}
-              <button onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Guardar</button>
             </form>
           </div>
         </div>

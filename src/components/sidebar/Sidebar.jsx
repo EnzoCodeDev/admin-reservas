@@ -11,26 +11,38 @@ import { AuthContext } from "../../context/AuthContext"; // Importa el contexto 
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { dispatch } = useContext(AuthContext); // Accede al dispatch del AuthContext para manejar el estado del usuario
+  const { dispatch } = useContext(AuthContext); // Accedemos al dispatch del AuthContext para manejar el estado del usuario
 
-  // Manejo del cierre de sesión
+ //Cerrar sesión
   const handleLogout = async () => {
     const confirm = await swal({
       title: "¿Estás seguro?",
       text: "Vas a cerrar sesión.",
       icon: "warning",
-      buttons: ["Cancelar", "Cerrar sesión"],
+      buttons: {
+        cancel: {
+          text: "Cancelar",
+          value: false,
+          visible: true,
+          className: "swal-button swal-button--cancel",
+          closeModal: true,
+        },
+        confirm: {
+          text: "Cerrar sesión",
+          value: true,
+          visible: true,
+          className: "swal-button swal-button--danger",
+          closeModal: true,
+        },
+      },
       dangerMode: true,
     });
 
     if (confirm) {
-      // Limpia el estado global de autenticación
       dispatch({ type: "LOGOUT" });
 
-      // Limpia el almacenamiento local para asegurarte de que el token no sea válido
       localStorage.removeItem("authToken");
 
-      // Redirige al usuario a la página de login
       swal("¡Hasta pronto!", "Has cerrado sesión con éxito.", "success");
       navigate("/login");
     }
@@ -49,7 +61,7 @@ const Sidebar = () => {
           <p className="title">PRINCIPAL</p>
           <Link to="/" style={{ textDecoration: "none" }}>
           <li>
-            <DashboardIcon className="icon" />
+              <DashboardIcon className="icon" />
               <span>Dashboard</span>
           </li>
           </Link>

@@ -9,7 +9,6 @@ import { urlApi } from "../../config/config";
 import swal from "sweetalert"; // Importar SweetAlert
 
 const NewHotel = () => {
-  const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
 

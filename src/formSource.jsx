@@ -15,7 +15,7 @@ export const userInputs = [
     id: "phone",
     label: "Teléfono",
     type: "text",
-    placeholder: "+1 234 567 8910",
+    placeholder: "(300)-123-4567",
   },
   {
     id: "password",
