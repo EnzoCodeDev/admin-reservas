@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import swal from "sweetalert"; // Importar SweetAlert para confirmaciones
+import { urlApi } from "../../config/config";
 
 const Datatable = ({ columns }) => {
   const location = useLocation();
@@ -30,7 +31,7 @@ const Datatable = ({ columns }) => {
     if (!confirm) return; // Si el usuario cancela, no hace nada
 
     try {
-      await axios.delete(`/${path}/${id}`); // Solicitud DELETE
+      await axios.delete(`${urlApi}/${path}/${id}`); // Solicitud DELETE
       setList(list.filter((item) => item._id !== id)); // Actualiza la lista local
       swal("Eliminado", "El registro ha sido eliminado con éxito.", "success");
     } catch (err) {
@@ -55,7 +56,7 @@ const Datatable = ({ columns }) => {
 
     try {
       await Promise.all(
-        selectedRows.map((id) => axios.delete(`/${path}/${id}`)) // DELETE en bulk
+        selectedRows.map((id) => axios.delete(`${urlApi}/${path}/${id}`)) // DELETE en bulk
       );
       setList(list.filter((item) => !selectedRows.includes(item._id))); // Filtra eliminados
       setSelectedRows([]); // Limpia las filas seleccionadas
@@ -102,7 +103,7 @@ const Datatable = ({ columns }) => {
     <div className="datatable">
       <div className="datatableTitle">
         {titleMap[path] || "Datos"} {/* Muestra el título dinámico basado en el path */}
-        <Link to={`/${path}/new`} className="link">
+        <Link to={`/api/${path}/new`} className="link">
           {path === "rooms"
             ? "Nueva Sala"
             : path === "hotels"
