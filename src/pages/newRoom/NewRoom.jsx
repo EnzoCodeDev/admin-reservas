@@ -23,6 +23,8 @@ const NewRoom = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     const roomNumbers = "1".split(",").map((room) => ({ number: room }));
+    
+        console.log(info);
     if(!hotelId) {
       swal({
         title: "Error",
@@ -31,6 +33,15 @@ const NewRoom = () => {
         button: "Intentar de nuevo",
       });
       return;
+    }
+    if (!info.title || !info.desc || !info.price || !info.maxPeople || !hotelId) {
+      swal({
+        title: "Error",
+        text: "Faltan datos requeridos para guardar la sala.",
+        icon: "error",
+        button: "Intentar de nuevo",
+      });
+      return false;
     }
     try {
       await axios.post(`${urlApi}/rooms/${hotelId}`, { ...info, roomNumbers });

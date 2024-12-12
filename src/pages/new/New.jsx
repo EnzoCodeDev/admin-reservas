@@ -16,19 +16,29 @@ const New = ({ inputs, title }) => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
+      const camposObligatorios = ['username', 'password', 'email', 'country', 'phone', 'city'];
+
+      for (const campo of camposObligatorios) {
+        if (!info[campo]) {
+          swal({
+            title: "Error",
+            text: `El campo "${campo}" es obligatorio.`,
+            icon: "error",
+            button: "Intentar de nuevo",
+          });
+          return false;
+        }
+      }
       const newUser = {
         username: info.username,
         email: info.email,
         phone: info.phone,
         country: info.country,
       };
-  
-      console.log("Enviando usuario:", newUser);
-  
-      const response = await axios.post(`${urlApi}/users`, newUser);
-  
-      console.log("Respuesta del servidor:", response);
-  
+
+      await axios.post(`${urlApi}/auth/register`, newUser);
+
+      // Mostrar SweetAlert de éxito
       swal({
         title: "¡Guardado correctamente!",
         text: "El usuario se ha guardado con éxito.",
@@ -38,9 +48,9 @@ const New = ({ inputs, title }) => {
         window.location.href = "/admin-reservas/users";
       });
     } catch (err) {
-      console.error("Error del servidor:", err.response);
-  
-      swal({
+
+       // Mostrar SweetAlert de error
+       swal({
         title: "Error",
         text: err.response?.data?.message || "Hubo un problema al guardar el usuario.",
         icon: "error",
