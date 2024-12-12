@@ -40,7 +40,6 @@ const NewHotel = () => {
         icon: "success",
         button: "Aceptar",
       }).then(() => {
-        // Opcional: redirigir a otra página
         window.location.href = "/admin-reservas/hotels";
       });
     } catch (err) {

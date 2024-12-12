@@ -5,13 +5,13 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert"; // Importa SweetAlert
+import swal from "sweetalert";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext"; // Importa el contexto de autenticación
+import { AuthContext } from "../../context/AuthContext";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { dispatch } = useContext(AuthContext); // Accedemos al dispatch del AuthContext para manejar el estado del usuario
+  const { dispatch } = useContext(AuthContext);
 
  //Cerrar sesión
   const handleLogout = async () => {
@@ -74,7 +74,7 @@ const Sidebar = () => {
           </Link>
           <Link to="/hotels" style={{ textDecoration: "none" }}>
             <li>
-              <LocationOnIcon className="icon" /> {/* Cambia el ícono aquí */}
+              <LocationOnIcon className="icon" /> 
               <span>Lugares</span>
             </li>
           </Link>

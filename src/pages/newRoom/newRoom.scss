@@ -57,18 +57,18 @@
               border: none;
               border-radius: 8px;
               background-color: #ffffff;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.06); // Sombra sutil en 4 lados
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.06); 
               font-size: 14px;
               color: #333;
               transition: all 0.3s ease;
 
               &:hover {
-                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 0 3px rgba(0, 0, 0, 0.1); // Mayor profundidad al pasar el mouse
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 0 3px rgba(0, 0, 0, 0.1); 
               }
 
               &:focus {
                 outline: none;
-                box-shadow: 0 4px 8px rgba(0, 123, 123, 0.2), 0 0 4px rgba(0, 123, 123, 0.15); // Resaltar más al enfocar
+                box-shadow: 0 4px 8px rgba(0, 123, 123, 0.2), 0 0 4px rgba(0, 123, 123, 0.15); 
               }
             }
 
@@ -89,7 +89,7 @@
             padding: 14px;
             border: none;
             border-radius: 8px;
-            background: linear-gradient(135deg, #00796b, #004d4d); // Gradiente elegante
+            background: linear-gradient(135deg, #00796b, #004d4d);
             color: #ffffff;
             font-weight: 600;
             cursor: pointer;
@@ -99,8 +99,8 @@
             align-self: flex-end;
 
             &:hover {
-              background: linear-gradient(135deg, #005a4c, #003b3b); // Gradiente más oscuro
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Sombra adicional
+              background: linear-gradient(135deg, #005a4c, #003b3b);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             }
 
             &:active {

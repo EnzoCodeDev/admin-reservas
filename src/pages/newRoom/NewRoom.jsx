@@ -6,13 +6,13 @@ import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { urlApi } from "../../config/config";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
-import swal from "sweetalert"; // Importar SweetAlert
+import { useNavigate } from "react-router-dom"; 
+import swal from "sweetalert"; 
 
 const NewRoom = () => {
   const [info, setInfo] = useState({});
   const [hotelId, setHotelId] = useState(undefined);
-  const navigate = useNavigate(); // Inicializa el hook de navegación
+  const navigate = useNavigate();
 
   const { data, loading, error } = useFetch("/hotels");
 
@@ -23,6 +23,15 @@ const NewRoom = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     const roomNumbers = "1".split(",").map((room) => ({ number: room }));
+    if(!hotelId) {
+      swal({
+        title: "Error",
+        text: "No se puede guardar la sala sin seleccionar un lugar.",
+        icon: "error",
+        button: "Intentar de nuevo",
+      });
+      return;
+    }
     try {
       await axios.post(`${urlApi}/rooms/${hotelId}`, { ...info, roomNumbers });
 
@@ -33,10 +42,9 @@ const NewRoom = () => {
         icon: "success",
         button: "Aceptar",
       }).then(() => {
-        navigate("/rooms"); // Redirige a la lista de habitaciones después de cerrar el popup
+        navigate("/rooms");
       });
     } catch (err) {
-      console.log(err);
 
       // Mostrar error con SweetAlert
       swal({
@@ -78,14 +86,17 @@ const NewRoom = () => {
                     setHotelId(e.target.value);
                   }}
                 >
+                  <option value={undefined}>
+                    Seleccionar un hotel
+                  </option>
                   {loading
                     ? "loading"
                     : data &&
-                      data.map((hotel) => (
-                        <option key={hotel._id} value={hotel._id}>
-                          {hotel.name}
-                        </option>
-                      ))}
+                    data.map((hotel) => (
+                      <option key={hotel._id} value={hotel._id}>
+                        {hotel.name}
+                      </option>
+                    ))}
                 </select>
               </div>
               <button onClick={handleClick}>Agregar</button>
