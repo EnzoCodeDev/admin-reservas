@@ -103,7 +103,7 @@ const Datatable = ({ columns }) => {
     <div className="datatable">
       <div className="datatableTitle">
         {titleMap[path] || "Datos"} {/* Muestra el título dinámico basado en el path */}
-        <Link to={`/api/${path}/new`} className="link">
+        <Link to={`/${path}/new`} className="link">
           {path === "rooms"
             ? "Nueva Sala"
             : path === "hotels"
