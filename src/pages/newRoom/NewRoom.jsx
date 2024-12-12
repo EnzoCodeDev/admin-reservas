@@ -41,7 +41,7 @@ const NewRoom = () => {
       // Mostrar error con SweetAlert
       swal({
         title: "Error",
-        text: "Hubo un problema al guardar la habitación.",
+        text: "Hubo un problema al guardar la sala.",
         icon: "error",
         button: "Intentar de nuevo",
       });
