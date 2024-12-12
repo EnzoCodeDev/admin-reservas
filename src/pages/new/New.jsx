@@ -20,12 +20,25 @@ const New = ({ inputs, title }) => {
     data.append("file", file);
     data.append("upload_preset", "upload");
     try {
+      const camposObligatorios = ['username', 'password', 'email', 'country', 'phone', 'city'];
+
+      for (const campo of camposObligatorios) {
+        if (!info[campo]) {
+          swal({
+            title: "Error",
+            text: `El campo "${campo}" es obligatorio.`,
+            icon: "error",
+            button: "Intentar de nuevo",
+          });
+          return false;
+        }
+      }
       const newUser = {
         ...info,
         img: "",
       };
 
-      await axios.post(`${urlApi}/users`, newUser);
+      await axios.post(`${urlApi}/auth/register`, newUser);
 
       // Mostrar SweetAlert de éxito
       swal({
@@ -37,7 +50,6 @@ const New = ({ inputs, title }) => {
         window.location.href = "/admin-reservas/users";
       });
     } catch (err) {
-      console.log(err);
 
        // Mostrar SweetAlert de error
        swal({

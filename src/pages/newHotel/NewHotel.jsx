@@ -26,6 +26,20 @@ const NewHotel = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
+      console.log(info);
+      const camposObligatorios = ['name', 'type', 'city', 'address', 'distance', 'title', 'desc', 'cheapestPrice'];
+
+      for (const campo of camposObligatorios) {
+        if (!info[campo]) {
+          swal({
+            title: "Error",
+            text: `El campo "${campo}" es obligatorio.`,
+            icon: "error",
+            button: "Intentar de nuevo",
+          });
+          return false;
+        }
+      }
       const newHotel = {
         ...info,
         rooms,
