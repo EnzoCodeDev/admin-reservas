@@ -6,7 +6,6 @@
   .listContainer {
     flex: 6;
     background-color: #ffffff; // Fondo del contenedor
-    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
@@ -99,22 +98,7 @@
       }
     }    
 
-    .newUserButton {
-      background-color: #4caf50; // Fondo verde
-      color: white;
-      font-size: 14px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+  
 
-      &:hover {
-        background-color: #43a047; // Verde más oscuro
-        box-shadow: 0 6px 16px rgba(67, 160, 71, 0.3);
-      }
-    }
   }
 }
