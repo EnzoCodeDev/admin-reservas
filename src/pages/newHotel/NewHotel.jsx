@@ -2,6 +2,7 @@ import "./newHotel.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { hotelInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
@@ -11,6 +12,8 @@ import swal from "sweetalert"; // Importar SweetAlert
 const NewHotel = () => {
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Nuevo estado para evitar múltiples envíos
+  const navigate = useNavigate();
 
   const { data, loading, error } = useFetch("/rooms");
 
@@ -25,6 +28,11 @@ const NewHotel = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return; // Evitar múltiples clics
+
+    setIsSubmitting(true);
+
     try {
       console.log(info);
       const camposObligatorios = ['name', 'type', 'city', 'address', 'distance', 'title', 'desc', 'cheapestPrice'];
@@ -37,9 +45,11 @@ const NewHotel = () => {
             icon: "error",
             button: "Intentar de nuevo",
           });
+          setIsSubmitting(false);
           return false;
         }
       }
+
       const newHotel = {
         ...info,
         rooms,
@@ -47,25 +57,24 @@ const NewHotel = () => {
 
       await axios.post(`${urlApi}/hotels`, newHotel);
 
-      // Mostrar SweetAlert de éxito
       swal({
         title: "¡Guardado correctamente!",
         text: "El lugar se ha guardado con éxito.",
         icon: "success",
         button: "Aceptar",
       }).then(() => {
-        window.location.href = "/admin-reservas/hotels";
+        navigate("/hotels");
       });
     } catch (err) {
       console.error(err);
-
-      // Mostrar SweetAlert de error
       swal({
         title: "Error",
         text: "Hubo un problema al guardar el lugar.",
         icon: "error",
         button: "Intentar de nuevo",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -111,7 +120,9 @@ const NewHotel = () => {
                       ))}
                 </select>
               </div>
-              <button onClick={handleClick}>Enviar</button>
+              <button onClick={handleClick} disabled={isSubmitting}>
+                {isSubmitting ? "Guardando..." : "Enviar"}
+              </button>
             </form>
           </div>
         </div>

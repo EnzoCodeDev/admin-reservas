@@ -45,7 +45,7 @@ const New = ({ inputs, title }) => {
         icon: "success",
         button: "Aceptar",
       }).then(() => {
-        window.location.href = "/admin-reservas/users";
+        navigate("/users");
       });
     } catch (err) {
 
