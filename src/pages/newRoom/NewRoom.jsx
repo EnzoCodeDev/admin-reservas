@@ -105,7 +105,7 @@ const NewRoom = () => {
                   }}
                 >
                   <option value={undefined} disabled selected>
-                    Seleccionar un hotel
+                    Seleccionar un lugar
                   </option>
                   {loading
                     ? "loading"

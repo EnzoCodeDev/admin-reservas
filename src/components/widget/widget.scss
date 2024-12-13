@@ -1,12 +1,27 @@
-.widget {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+.widget-container {
   display: flex;
   justify-content: space-between;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+.widget {
   flex: 1;
-  padding: 10px;
-  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-  border-radius: 10px;
-  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 10px;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2), -6px -6px 15px rgba(255, 255, 255, 0.8);
+  }
 
   .left,
   .right {
@@ -15,40 +30,70 @@
     justify-content: space-between;
 
     .title {
-      font-weight: bold;
-      font-size: 14px;
-      color: rgb(160, 160, 160);
+      font-weight: 600;
+      font-size: 18px;
+      color: #444;
+      letter-spacing: 0.5px;
     }
 
     .counter {
-      font-size: 28px;
-      font-weight: 300;
+      font-size: 42px;
+      font-weight: bold;
+      color: #111;
     }
 
-    .link {
-      width: max-content;
-      font-size: 12px;
-      border-bottom: 1px solid gray;
-    }
-
-    .percentage {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-
-      &.positive {
-        color: green;
+    .btn {
+      padding: 12px 20px;
+      background-color: #4caf50; // Verde moderno
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 2px 2px 8px rgba(76, 175, 80, 0.3);
+  
+      &:hover {
+        background-color: #43a047; // Verde más oscuro al pasar el mouse
+        box-shadow: 2px 4px 10px rgba(67, 160, 71, 0.4);
       }
-      &.negative {
-        color: red;
+    }
+  
+    .btn-secondary {
+      background-color: #ff9800; // Naranja vibrante
+      color: #fff;
+      border-radius: 10px;
+      font-size: 15px;
+      padding: 12px 20px;
+      margin-top: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 2px 2px 8px rgba(255, 152, 0, 0.3);
+  
+      &:hover {
+        background-color: #fb8c00; // Naranja más oscuro
+        box-shadow: 2px 4px 10px rgba(251, 140, 0, 0.4);
       }
     }
+  }
 
-    .icon {
-      font-size: 18px;
-      padding: 5px;
-      border-radius: 5px;
-      align-self: flex-end;
-    }
+  .percentage {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #4caf50; // Verde moderno para porcentajes positivos
+    text-shadow: 1px 1px 2px rgba(76, 175, 80, 0.5);
+  }
+
+  .icon {
+    font-size: 36px;
+    padding: 12px;
+    border-radius: 15px;
+    align-self: flex-end;
+    background-color: #f0f4f7; // Fondo sutil para destacar
+    color: #ffffff;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.8);
   }
 }

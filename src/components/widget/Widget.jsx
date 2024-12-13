@@ -1,23 +1,24 @@
 import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import MeetingRoomOutlinedIcon from "@mui/icons-material/MeetingRoomOutlined";
+import { useNavigate } from "react-router-dom";
 
 const Widget = ({ type }) => {
+  const navigate = useNavigate();
   let data;
 
-  //temporary
-  const amount = 100;
-  const diff = 20;
+  const diff = 12.4;
 
   switch (type) {
     case "user":
       data = {
-        title: "USERS",
-        isMoney: false,
-        link: "See all users",
+        title: "USUARIOS",
+        amount: 5,
+        linkText1: "Ver Usuarios",
+        linkText2: "Crear Usuario",
+        linkRoute1: "/users",
+        linkRoute2: "/users/new",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -29,42 +30,35 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "order":
+    case "hotel":
       data = {
-        title: "ORDERS",
-        isMoney: false,
-        link: "View all orders",
+        title: "LUGARES",
+        amount: 5,
+        linkText1: "Ver Lugares",
+        linkText2: "Crear Lugar",
+        linkRoute1: "/hotels",
+        linkRoute2: "/hotels/new",
         icon: (
-          <ShoppingCartOutlinedIcon
+          <LocationOnOutlinedIcon
             className="icon"
             style={{
-              backgroundColor: "rgba(218, 165, 32, 0.2)",
-              color: "goldenrod",
+              backgroundColor: "rgba(0, 0, 255, 0.2)",
+              color: "blue",
             }}
           />
         ),
       };
       break;
-    case "earning":
+    case "room":
       data = {
-        title: "EARNINGS",
-        isMoney: true,
-        link: "View net earnings",
+        title: "SALAS",
+        amount: 11,
+        linkText1: "Ver Salas",
+        linkText2: "Crear Sala",
+        linkRoute1: "/rooms",
+        linkRoute2: "/rooms/new",
         icon: (
-          <MonetizationOnOutlinedIcon
-            className="icon"
-            style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
-          />
-        ),
-      };
-      break;
-    case "balance":
-      data = {
-        title: "BALANCE",
-        isMoney: true,
-        link: "See details",
-        icon: (
-          <AccountBalanceWalletOutlinedIcon
+          <MeetingRoomOutlinedIcon
             className="icon"
             style={{
               backgroundColor: "rgba(128, 0, 128, 0.2)",
@@ -75,22 +69,26 @@ const Widget = ({ type }) => {
       };
       break;
     default:
-      break;
+      data = null;
   }
+
+  if (!data) return null;
 
   return (
     <div className="widget">
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">
-          {data.isMoney && "$"} {amount}
-        </span>
-        <span className="link">{data.link}</span>
+        <span className="counter">{data.amount}</span>
+        <button className="btn" onClick={() => navigate(data.linkRoute1)}>
+          {data.linkText1}
+        </button>
+        <button className="btn btn-secondary" onClick={() => navigate(data.linkRoute2)}>
+          {data.linkText2}
+        </button>
       </div>
       <div className="right">
         <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff} %
+          +{diff} %
         </div>
         {data.icon}
       </div>
