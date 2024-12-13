@@ -12,6 +12,7 @@ import swal from "sweetalert";
 const NewRoom = () => {
   const [info, setInfo] = useState({});
   const [hotelId, setHotelId] = useState(undefined);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Estado para manejar envíos
   const navigate = useNavigate();
 
   const { data, loading, error } = useFetch("/hotels");
@@ -22,18 +23,23 @@ const NewRoom = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return; // Evita múltiples clics mientras se procesa
+    setIsSubmitting(true);
+
     const roomNumbers = "1".split(",").map((room) => ({ number: room }));
-    
-        console.log(info);
-    if(!hotelId) {
+
+    if (!hotelId) {
       swal({
         title: "Error",
         text: "No se puede guardar la sala sin seleccionar un lugar.",
         icon: "error",
         button: "Intentar de nuevo",
       });
+      setIsSubmitting(false);
       return;
     }
+
     if (!info.title || !info.desc || !info.price || !info.maxPeople || !hotelId) {
       swal({
         title: "Error",
@@ -41,12 +47,13 @@ const NewRoom = () => {
         icon: "error",
         button: "Intentar de nuevo",
       });
+      setIsSubmitting(false);
       return false;
     }
+
     try {
       await axios.post(`${urlApi}/rooms/${hotelId}`, { ...info, roomNumbers });
 
-      // Mostrar popup con SweetAlert
       swal({
         title: "¡Guardado correctamente!",
         text: "La sala se ha guardado con éxito.",
@@ -56,14 +63,14 @@ const NewRoom = () => {
         navigate("/rooms");
       });
     } catch (err) {
-
-      // Mostrar error con SweetAlert
       swal({
         title: "Error",
         text: "Hubo un problema al guardar la sala.",
         icon: "error",
         button: "Intentar de nuevo",
       });
+    } finally {
+      setIsSubmitting(false); // Restablece el estado después de finalizar la solicitud
     }
   };
 
@@ -97,20 +104,22 @@ const NewRoom = () => {
                     setHotelId(e.target.value);
                   }}
                 >
-                  <option value={undefined}>
+                  <option value={undefined} disabled selected>
                     Seleccionar un hotel
                   </option>
                   {loading
                     ? "loading"
                     : data &&
-                    data.map((hotel) => (
-                      <option key={hotel._id} value={hotel._id}>
-                        {hotel.name}
-                      </option>
-                    ))}
+                      data.map((hotel) => (
+                        <option key={hotel._id} value={hotel._id}>
+                          {hotel.name}
+                        </option>
+                      ))}
                 </select>
               </div>
-              <button onClick={handleClick}>Agregar</button>
+              <button onClick={handleClick} disabled={isSubmitting}>
+                {isSubmitting ? "Guardando..." : "Agregar"}
+              </button>
             </form>
           </div>
         </div>
