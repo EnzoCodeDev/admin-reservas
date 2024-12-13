@@ -1,15 +1,36 @@
 .chart {
   flex: 4;
-  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-  padding: 10px;
-  color: gray;
+  padding: 20px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1), -4px -4px 12px rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #555;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2), -6px -6px 15px rgba(255, 255, 255, 0.8);
+  }
 
   .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
     margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
   }
 
   .chartGrid {
-    stroke: rgb(228, 225, 225);
+    stroke: #e4e1e1; // Gris suave para las líneas del gráfico
+    stroke-width: 1;
+    transition: stroke 0.3s ease;
+
+    &:hover {
+      stroke: #cccccc; // Cambia ligeramente el color al pasar el mouse
+    }
   }
 }
