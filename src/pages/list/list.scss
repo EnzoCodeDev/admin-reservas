@@ -5,47 +5,69 @@
 
   .listContainer {
     flex: 6;
-    background-color: #ffffff; // Fondo del contenedor
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; // Fondo del contenedor principal
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1), -2px -2px 6px rgba(255, 255, 255, 0.7); // Sombras dinámicas
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px); // Efecto de elevación al pasar el mouse
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); // Sombras más profundas al pasar el mouse
+    }
 
     .MuiDataGrid-root {
       border: none;
 
       .MuiDataGrid-columnHeaders {
-        background-color: #f5f5f5; // Fondo para los encabezados
+        background: linear-gradient(145deg, #f9f9f9, #f1f1f1); // Fondo con gradiente
         color: #555; // Texto oscuro
-        font-weight: 600;
+        font-weight: 700; // Encabezados en negrita
         text-transform: uppercase;
         border-bottom: 2px solid #ddd;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #eaeaea; // Cambio sutil de color al pasar el mouse
+        }
 
         .MuiDataGrid-columnHeaderTitle {
-          font-size: 14px;
+          font-size: 15px; // Tamaño de texto más prominente
+          letter-spacing: 0.5px; // Espaciado entre letras
         }
       }
 
       .MuiDataGrid-cell {
-        font-size: 14px;
-        color: #333;
+        font-size: 15px; // Texto ligeramente más grande
+        color: #444;
         border-bottom: 1px solid #eee;
+        transition: background-color 0.3s ease, transform 0.2s ease;
 
         &:hover {
           background-color: #f0f8ff; // Fondo azul claro al pasar el mouse
+          transform: scale(1.02); // Aumentar ligeramente el tamaño de la celda
+        }
+
+        &.MuiDataGrid-cell--editable {
+          background-color: #fffbe5; // Fondo amarillo pálido para celdas editables
         }
       }
 
       .MuiDataGrid-row {
+        transition: all 0.3s ease;
+
         &:nth-child(odd) {
-          background-color: #fafafa;
+          background-color: #fafafa; // Alternancia de colores en las filas
         }
 
         &:hover {
-          background-color: #e3f2fd; // Resaltado al pasar el mouse
+          background-color: #e3f2fd; // Resaltado en azul claro al pasar el mouse
+          transform: scale(1.01); // Leve aumento de la fila completa
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Sombra al resaltar
         }
       }
 
       .MuiDataGrid-footerContainer {
-        background-color: #f9f9f9;
+        background-color: #f9f9f9; // Fondo claro para el pie de tabla
         border-top: 1px solid #ddd;
         font-size: 14px;
         font-weight: 500;
@@ -55,7 +77,7 @@
       .MuiCheckbox-root {
         color: #4caf50; // Verde para los checkboxes
         &:hover {
-          background-color: rgba(76, 175, 80, 0.1);
+          background-color: rgba(76, 175, 80, 0.1); // Fondo verde suave al pasar el mouse
         }
       }
     }
@@ -63,42 +85,64 @@
     .cellWithImg {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
 
       .cellImg {
-        width: 32px;
-        height: 32px;
+        width: 36px; // Tamaño ligeramente mayor
+        height: 36px;
         border-radius: 50%;
         object-fit: cover;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); // Sombra más suave para las imágenes
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1); // Aumentar la imagen al pasar el mouse
+        }
       }
     }
 
     .deleteButton {
       background-color: #ff4d4d; // Fondo rojo llamativo
-      color: #ffffff; // Texto blanco brillante para máximo contraste
-      padding: 10px 16px; // Tamaño más grande
-      font-size: 16px; // Texto más grande
-      font-weight: bold; // Texto en negrita
-      text-transform: uppercase; // Texto en mayúsculas
-      border: 2px solid #ff8080; // Borde más claro para resaltar
-      border-radius: 8px;
+      color: #ffffff; // Texto blanco brillante
+      padding: 10px 16px; // Tamaño mayor
+      font-size: 15px; // Texto más grande
+      font-weight: bold;
+      text-transform: uppercase;
+      border: 2px solid #ff8080; // Borde más claro
+      border-radius: 12px; // Bordes más redondeados
       cursor: pointer;
       transition: all 0.3s ease;
-    
+
       &:hover {
-        background-color: #e53935; // Rojo más oscuro al pasar el mouse
+        background-color: #e53935; // Fondo más oscuro al pasar el mouse
         border-color: #d32f2f; // Borde más oscuro
-        box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4); // Sombra más visible
+        box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4); // Sombra llamativa al pasar el mouse
+        transform: scale(1.05); // Aumentar ligeramente el botón
       }
-    
+
       &:focus {
         outline: none;
-        box-shadow: 0 0 6px rgba(255, 128, 128, 0.6); // Sombra clara al hacer foco
+        box-shadow: 0 0 6px rgba(255, 128, 128, 0.6); // Sombra al hacer foco
       }
-    }    
+    }
 
-  
+    .newUserButton {
+      background-color: #4caf50; // Fondo verde
+      color: white;
+      font-size: 15px;
+      padding: 12px 20px; // Tamaño más grande
+      border: none;
+      border-radius: 12px; // Bordes redondeados
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2); // Sombra verde suave
 
+      &:hover {
+        background-color: #43a047; // Verde más oscuro
+        box-shadow: 0 6px 16px rgba(67, 160, 71, 0.3); // Sombra más pronunciada
+        transform: translateY(-2px); // Mover ligeramente hacia arriba al pasar el mouse
+      }
+    }
   }
 }
